@@ -14,5 +14,4 @@ def flac2wav(flac_path):
 
 if __name__ == "__main__":
     path = os.path.dirname('./../src/components/flac/')
-    print(path)
     flac2wav(path)
