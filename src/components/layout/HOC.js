@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Keyboard from "./Keyboard/Keyboard";
-import Word from "./Inputs/Word";
+import Word from "./Inputs/Answer";
 
 class HOC extends Component {
   constructor(props) {
@@ -31,14 +31,10 @@ class HOC extends Component {
     }
   };
 
-  handleWord = (e) => {
-    this.setState({ word: e.target.value });
-  };
-
   render() {
     return (
       <React.Fragment>
-        <Word placeholder={"Type the word"} handleWord={this.handleWord} />
+        <Word placeholder={"Type the word"} />
         <Keyboard onKeyPress={this.onKeyPress} />
       </React.Fragment>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Word = ({ placeholder, handleWord }) => {
+const Answer = ({ placeholder, handleWord }) => {
   return (
     <React.Fragment>
       <label htmlFor="Word">
@@ -22,4 +22,4 @@ Word.propTypes = {
   handleWord: PropTypes.func
 };
 
-export default Word;
+export default Answer;

@@ -3,7 +3,7 @@ import "./App.css";
 
 import HOC from "./components/layout/HOC";
 
-function App() {
+const App = () => {
   return (
     <React.Fragment>
       <div className="container">
