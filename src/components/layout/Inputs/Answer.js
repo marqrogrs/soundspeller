@@ -4,20 +4,22 @@ import PropTypes from "prop-types";
 const Answer = ({ placeholder, handleWord }) => {
   return (
     <React.Fragment>
-      <label htmlFor="Word">
+      <div className="form-group">
+        <label htmlFor="Answer">Type your Answer</label>
         <input
           type="text"
-          name="Word"
-          className="form-control form-control-lg"
+          name="Answer"
+          id="answer"
+          className="form-control"
           placeholder={placeholder}
           onChange={handleWord}
         />
-      </label>
+      </div>
     </React.Fragment>
   );
 };
 
-Word.propTypes = {
+Answer.propTypes = {
   placeholder: PropTypes.string.isRequired,
   handleWord: PropTypes.func
 };

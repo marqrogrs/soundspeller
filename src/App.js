@@ -1,16 +1,25 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import HOC from "./components/layout/HOC";
+import Navbar from "./components/layout/Navbar/Navbar";
+import Game from "./components/layout/Game";
+import Home from "./components/layout/Home";
 
-const App = () => {
-  return (
-    <React.Fragment>
-      <div className="container">
-        <HOC />
-      </div>
-    </React.Fragment>
-  );
+import "./App.scss";
+
+class App extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <Navbar />
+          <div className="container">
+            <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+            <Route path={`${process.env.PUBLIC_URL}/game`} component={Game} />
+          </div>
+        </Router>
+      </React.Fragment>
+    );
+  }
 }
-
 export default App;
