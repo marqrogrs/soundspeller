@@ -12,13 +12,9 @@ class Home extends Component {
       level: 1
     };
   }
+
   // Questions Component
-  handleQuestions = (e) => {
-    e.preventDefault();
-    let textarea = document.getElementById("textarea").value.split(/[\s,]+/);
-
-    this.setState({ words: textarea });
-
+  check = () => {
     this.state.words.length > 0
       ? this.props.history.push({
           pathname: `${process.env.PUBLIC_URL}/game`,
@@ -26,6 +22,21 @@ class Home extends Component {
         })
       : console.log("nope");
   };
+
+  handleQuestions = (e) => {
+    e.preventDefault();
+    let textarea = document.getElementById("textarea").value.split(/[\s,]+/);
+
+    if (textarea.includes("")) {
+      textarea = textarea.filter((i) => {
+        return i !== "";
+      });
+    }
+
+    this.setState({ words: textarea });
+    setTimeout(this.check, 100);
+  };
+
   render() {
     return (
       <React.Fragment>
