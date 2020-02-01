@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 
-import Input from "./components/Input";
+import HOC from "./components/layout/HOC";
 
 function App() {
   return (
     <React.Fragment>
-      <h1>HEy</h1>
-      <Input />
+      <div className="container">
+        <HOC />
+      </div>
     </React.Fragment>
   );
 }
