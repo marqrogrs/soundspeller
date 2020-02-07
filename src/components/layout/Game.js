@@ -1,14 +1,16 @@
 import React, { Component } from "react";
+import { Howl } from "howler";
 
+import Layout from "./Inputs/Keyboard";
 import Answer from "./Inputs/Answer";
-import Keyboard from "./Inputs/Keyboard";
 
 class Game extends Component {
-  constructor(props) {
-    super(props);
+  state = this.props.location.state;
 
-    this.state = this.props.location.state;
-  }
+  letters = null;
+  syllabes = null;
+
+  count = 0;
 
   syncAnswer = () => {
     document.getElementById("answer").value = this.state.playerWord;
@@ -37,18 +39,80 @@ class Game extends Component {
     this.syncAnswer();
   };
 
+  syllabify = (words) => {
+    // const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
+    const syllableRegex = /((?:(a)|(e)|(i)|(o)|(u))+)|(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy])?|(.))/gi;
+    this.syllabes = words.match(syllableRegex).filter((el) => el !== "");
+  };
+
   // Answer Function
   handlePlayerInput = (e) => {
     this.setState({ playerWord: e.target.value });
   };
+
+  speak = (word) => {
+    const utterance = new SpeechSynthesisUtterance(word);
+    speechSynthesis.speak(utterance);
+  };
+
+  // chain sound
+
+  howl = (syllabes) => {
+    const sources = [];
+
+    syllabes.map((s) => {
+      try {
+        sources.push(require(`./../audio/${s}.mp3`));
+      } catch (error) {
+        try {
+          s.split("").map((s) => sources.push(require(`./../audio/${s}.mp3`)));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      return null;
+    });
+
+    const onEnd = () => {
+      this.count += 1;
+
+      try {
+        howler[this.count].play();
+      } catch (error) {
+        howler[this.count - 1].unload();
+      }
+    };
+
+    // build howler
+    const howler = [];
+
+    sources.map((source) =>
+      howler.push(new Howl({ src: source, onend: onEnd }))
+    );
+
+    try {
+      howler[0].play();
+    } catch (error) {}
+  };
+
+  componentWillMount() {
+    this.letters = ["a", "b", "c"];
+  }
+
+  componentDidMount() {
+    this.syllabify(this.state.words[0]);
+    this.howl(this.syllabes);
+  }
+
   render() {
+    const letters = this.letters;
     return (
       <React.Fragment>
         <Answer
           placeholder={"Type the word"}
           handleWord={this.handlePlayerInput}
         />
-        <Keyboard onKeyPress={this.onKeyPress} />
+        <Layout onKeyPress={this.onKeyPress} letters={letters} />
       </React.Fragment>
     );
   }

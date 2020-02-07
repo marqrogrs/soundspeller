@@ -37,10 +37,25 @@ class Home extends Component {
     setTimeout(this.check, 100);
   };
 
+  handleLevel = (e) => {
+    const level = e.target;
+    this.setState({ level: level.innerText.replace("Level ", "") });
+    document
+      .getElementsByClassName("btn-primary")[0]
+      .classList.replace("btn-primary", "btn-outline-primary");
+
+    level.classList.replace("btn-outline-primary", "btn-primary");
+
+    // console.log(level);
+  };
+
   render() {
     return (
       <React.Fragment>
-        <Question handleQuestions={this.handleQuestions} />
+        <Question
+          handleQuestions={this.handleQuestions}
+          handleLevel={this.handleLevel}
+        />
       </React.Fragment>
     );
   }

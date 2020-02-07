@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import data from "./data.js";
 import XMLParser from "react-xml-parser";
-import { Howl } from "howler";
 
 class Input extends Component {
   state = {
