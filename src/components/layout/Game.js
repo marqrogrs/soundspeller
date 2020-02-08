@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Howl } from "howler";
 
-import Layout from "./Inputs/Layout";
+import Keyboard from "./Inputs/Keyboard";
 import Answer from "./Inputs/Answer";
 
 class Game extends Component {
@@ -118,7 +118,7 @@ class Game extends Component {
           placeholder={"Type the word"}
           handleWord={this.handlePlayerInput}
         />
-        <Layout onKeyPress={this.onKeyPress} letters={letters} />
+        <Keyboard onKeyPress={this.onKeyPress} letters={letters} />
       </React.Fragment>
     );
   }
