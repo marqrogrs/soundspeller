@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Howl } from "howler";
 
-import Layout from "./Inputs/Keyboard";
+import Layout from "./Inputs/Layout";
 import Answer from "./Inputs/Answer";
 
 class Game extends Component {
@@ -12,7 +12,7 @@ class Game extends Component {
 
   count = 0;
 
-  syncAnswer = () => {
+  syncAnswer = (id) => {
     document.getElementById("answer").value = this.state.playerWord;
   };
 
@@ -30,11 +30,22 @@ class Game extends Component {
       });
     } else if (button === "{enter}") {
       // submit the word
+      this.state.playerWord.split("").map((letter) => {
+        document.getElementById("out").value += `${letter} `;
+        const file = require(`./../audio/k.mp3`);
+
+        const howl = new Howl({ src: file });
+        howl.play();
+      });
     } else {
       // add letter to state
       this.setState((previousState) => ({
         playerWord: previousState.playerWord + button
       }));
+      // change bg
+
+      this.letters = button;
+      console.log(this.letters);
     }
     this.syncAnswer();
   };
@@ -95,14 +106,9 @@ class Game extends Component {
     } catch (error) {}
   };
 
-  componentWillMount() {
-    this.letters = ["a", "b", "c"];
-  }
+  componentWillMount() {}
 
-  componentDidMount() {
-    this.syllabify(this.state.words[0]);
-    this.howl(this.syllabes);
-  }
+  componentDidMount() {}
 
   render() {
     const letters = this.letters;

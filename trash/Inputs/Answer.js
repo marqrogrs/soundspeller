@@ -15,6 +15,12 @@ const Answer = ({ placeholder, handleWord }) => {
           onChange={handleWord}
         />
       </div>
+
+      <div className="form-group">
+        <label htmlFor="out">
+          <input type="text" name="out" id="out" className="form-control" />
+        </label>
+      </div>
     </React.Fragment>
   );
 };

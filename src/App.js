@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Navbar from "./components/layout/Navbar/Navbar";
-import Game from "./components/layout/Game";
-import Home from "./components/layout/Home";
-
 import "./App.scss";
 
 class App extends Component {
@@ -14,8 +10,8 @@ class App extends Component {
         <Router>
           <Navbar />
           <div className="container">
-            <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-            <Route path={`${process.env.PUBLIC_URL}/game`} component={Game} />
+            <Route exact path={`${process.env.PUBLIC_URL}/`} />
+            <Route path={`${process.env.PUBLIC_URL}/game`} />
           </div>
         </Router>
       </React.Fragment>

@@ -7,11 +7,15 @@ import "react-simple-keyboard/build/css/index.css";
 const Layout = ({ onKeyPress, layout, display, letters }) => {
   const keyboard = useRef();
 
-  const addClass = () => {
-    letters.map((l) => {
-      keyboard.current.getButtonElement(l).classList.add("flash");
-      console.log(l);
-    });
+  const addClass = (letters) => {
+    try {
+      keyboard.current
+        .getButtonElement(letters)
+        .classList.add("changeLetterBg");
+      console.log(letters);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
