@@ -8,7 +8,7 @@ class Home extends Component {
 
     this.state = {
       words: [],
-      playerWord: "",
+      playerAnswer: "",
       level: 1
     };
   }
@@ -39,14 +39,12 @@ class Home extends Component {
 
   handleLevel = (e) => {
     const level = e.target;
-    this.setState({ level: level.innerText.replace("Level ", "") });
+    this.setState({ level: parseInt(level.innerText.replace("Level ", "")) });
     document
       .getElementsByClassName("btn-primary")[0]
       .classList.replace("btn-primary", "btn-outline-primary");
 
     level.classList.replace("btn-outline-primary", "btn-primary");
-
-    // console.log(level);
   };
 
   render() {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Answer = ({ placeholder, handleWord }) => {
+const Answer = ({ placeholder, handlePlayerInput }) => {
   return (
     <React.Fragment>
       <div className="form-group">
@@ -11,14 +11,8 @@ const Answer = ({ placeholder, handleWord }) => {
           id="answer"
           className="form-control"
           placeholder={placeholder}
-          onChange={handleWord}
+          onChange={handlePlayerInput}
         />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="out">
-          <input type="text" name="out" id="out" className="form-control" />
-        </label>
       </div>
     </React.Fragment>
   );
@@ -26,7 +20,7 @@ const Answer = ({ placeholder, handleWord }) => {
 
 Answer.propTypes = {
   placeholder: PropTypes.string.isRequired,
-  handleWord: PropTypes.func
+  handlePlayerInput: PropTypes.func
 };
 
 export default Answer;
