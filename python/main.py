@@ -11,7 +11,7 @@ def flac2wav(flac_path):
         subprocess.run('ffmpeg -i {0}/{1}.aiff {0}/{1}.mp3 -n'.format(flac_path, flac))
 
 
-with open('test.json') as json_file:
+with open('ssLexicon.json') as json_file:
     data = json.load(json_file)
 
 

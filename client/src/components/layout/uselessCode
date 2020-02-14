@@ -1,0 +1,162 @@
+  syllabify = (words) => {
+    // const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
+    const syllableRegex = /((?:(a)|(e)|(i)|(o)|(u))+)|(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy])?|(.))/gi;
+    this.syllabes = words.match(syllableRegex).filter((el) => el !== "");
+  };
+
+
+
+
+
+    howl = (syllabes) => {
+    const sources = [];
+
+    syllabes.map((s) => {
+      try {
+        sources.push(require(`./../audio/${s}.mp3`));
+      } catch (error) {
+        try {
+          s.split("").map((s) => sources.push(require(`./../audio/${s}.mp3`)));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      return null;
+    });
+
+    const onEnd = () => {
+      this.count += 1;
+
+      try {
+        howler[this.count].play();
+      } catch (error) {
+        howler[this.count - 1].unload();
+      }
+    };
+
+    // build howler
+    const howler = [];
+
+    sources.map((source) =>
+      howler.push(new Howl({ src: source, onend: onEnd }))
+    );
+
+    try {
+      howler[0].play();
+    } catch (error) {}
+  };
+
+
+
+
+  on clrKeys
+
+   set the foreColor of btn "q" to "#CCCC99" -- Green
+
+   set the backColor of btn "q" to "#FFFFFF"
+
+   set the foreColor of btn "w" to  "#6699CC" -- Light Blue  
+
+   set the backColor of btn "w" to "#FFFFFF"
+
+   set the foreColor of btn "e" to "#003399" -- Blue 
+
+   set the backColor of btn "e" to "#FFFFFF"
+
+   set the foreColor of btn "r" to "#CC9900" -- gold 
+
+   set the backColor of btn "r" to "#FFFFFF"
+
+   set the foreColor of btn "t" to "#666666" -- dark gray  
+
+   set the backColor of btn "t" to "#FFFFFF"
+
+   set the foreColor of btn "y" to "#666666" -- dark gray 
+
+   set the backColor of btn "y" to "#FFFFFF"
+
+   set the foreColor of btn "u" to "#CC9900" -- gold 
+
+   set the backColor of btn "u" to "#FFFFFF"
+
+   set the foreColor of btn "i" to "#003399" -- Blue 
+
+   set the backColor of btn "i" to "#FFFFFF"
+
+   set the foreColor of btn "o" to "#6699CC" -- Light Blue  
+
+   set the backColor of btn "o" to "#FFFFFF"
+
+   set the foreColor of btn "p" to "#CCCC99" -- green 
+
+   set the backColor of btn "p" to "#FFFFFF"
+
+   set the foreColor of btn "g" to "#666666" -- dark gray 
+
+   set the backColor of btn "g" to "#FFFFFF"
+
+   set the foreColor of btn "h" to "#666666" -- dark gray 
+
+   set the backColor of btn "h" to "#FFFFFF"
+
+   set the foreColor of btn "f" to "#CC9900" -- gold 
+
+   set the backColor of btn "f" to "#FFFFFF"
+
+   set the foreColor of btn "j" to "#CC9900" -- gold 
+
+   set the backColor of btn "j" to "#FFFFFF"
+
+   set the foreColor of btn "d" to "#003399" -- Blue 
+
+   set the backColor of btn "d" to "#FFFFFF"
+
+   set the foreColor of btn "k" to "#003399" -- Blue 
+
+   set the backColor of btn "k" to "#FFFFFF"
+
+   set the foreColor of btn "s" to "#6699CC" -- Light Blue 
+
+   set the backColor of btn "s" to "#FFFFFF"
+
+   set the foreColor of btn "l" to "#6699CC" -- Light Blue 
+
+   set the backColor of btn "l" to "#FFFFFF"
+
+   set the foreColor of btn "a" to "#CCCC99" -- green
+
+   set the backColor of btn "a" to "#FFFFFF"
+
+   set the foreColor of btn ";" to "#CCCC99" -- green
+
+   set the backColor of btn ";" to "#FFFFFF"
+
+   set the foreColor of btn "z" to "#CCCC99" -- green
+
+   set the backColor of btn "z" to "#FFFFFF"
+
+   set the foreColor of btn "x" to "#6699CC" -- Light Blue 
+
+   set the backColor of btn "x" to "#FFFFFF"
+
+   set the foreColor of btn "c" to "#003399" -- Blue 
+
+   set the backColor of btn "c" to "#FFFFFF"
+
+   set the foreColor of btn "v" to "#CC9900" -- gold 
+
+   set the backColor of btn "v" to "#FFFFFF"
+
+   set the foreColor of btn "b" to "#666666" -- dark gray 
+
+   set the backColor of btn "b" to "#FFFFFF"
+
+   set the foreColor of btn "n" to "#666666" -- dark gray 
+
+   set the backColor of btn "n" to "#FFFFFF"
+
+   set the foreColor of btn "m" to "#CC9900" -- gold 
+
+   set the backColor of btn "m" to "#FFFFFF"
+
+end clrKeys
