@@ -7,7 +7,14 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      words: [],
+      words: [
+        {
+          word: "abandon",
+          grap: "A,B,A,N,D,O,N",
+          phon: "EY-B AE N D-AAN N",
+          syll: "a.band.on"
+        }
+      ],
       playerAnswer: "",
       level: 1
     };

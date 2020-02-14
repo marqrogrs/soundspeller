@@ -5,7 +5,18 @@ import Keyboard from "./Inputs/Keyboard";
 import Answer from "./Inputs/Answer";
 
 class Game extends Component {
-  state = this.props.location.state;
+  state = {
+    words: [
+      {
+        word: "abandon",
+        grap: "A,B,A,N,D,O,N",
+        phon: "EY-B AE N D-AAN N",
+        syll: "a.band.on"
+      }
+    ],
+    playerAnswer: "",
+    level: 1
+  };
 
   // Player Input from Mechanical Keyboard
   handlePlayerInput = (e) => {
@@ -39,7 +50,6 @@ class Game extends Component {
   componentDidMount() {
     switch (this.state.level) {
       default:
-        console.log("level 1");
         break;
       case 2:
         console.log("Level 2");

@@ -14,7 +14,7 @@ const Layout = ({
   const keyboard = useRef();
 
   useEffect(() => {
-    console.log(keyboard.current.getButtonElement("a"));
+    // console.log(keyboard.current.getButtonElement("a"));
   });
 
   // Keyboard Function
