@@ -47,6 +47,8 @@ class Game extends Component {
     speechSynthesis.speak(utterance);
   };
 
+  interval = () => {};
+
   componentDidMount() {
     switch (this.state.level) {
       default:
