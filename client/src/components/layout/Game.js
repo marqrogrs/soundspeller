@@ -47,7 +47,16 @@ class Game extends Component {
     speechSynthesis.speak(utterance);
   };
 
-  interval = () => {};
+  interval = (syll) => {
+    let results = syll.split(".").map((e, index) => {
+      e = { syll: e };
+      console.log(e.syll);
+      e.grap = this.state.words[0].grap.split(",").slice(index, e.syll.length);
+      console.log(e.grap);
+      return e;
+    });
+    console.log(results);
+  };
 
   componentDidMount() {
     switch (this.state.level) {
