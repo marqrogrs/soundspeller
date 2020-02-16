@@ -47,9 +47,25 @@ class Game extends Component {
     speechSynthesis.speak(utterance);
   };
 
+  interval = (syll) => {
+    let count = 0;
+
+    setInterval(() => {
+      console.log(syll.split(".")[count]);
+      count += 1;
+
+      if (count >= syll.split(".")) {
+        clearInterval();
+      }
+    }, 1000);
+
+    clearInterval();
+  };
+
   componentDidMount() {
     switch (this.state.level) {
       default:
+        this.interval(this.state.words[0].syll);
         break;
       case 2:
         console.log("Level 2");
