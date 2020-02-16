@@ -51,7 +51,7 @@ class Game extends Component {
     let results = syll.split(".").map((e, index) => {
       e = { syll: e };
       console.log(e.syll);
-      e.grap = this.state.words[0].grap.split(",").slice(index, e.syll.length);
+      e.grap = this.state.words[0].grap.split(",");
       console.log(e.grap);
       return e;
     });
