@@ -50,6 +50,8 @@ class Game extends Component {
   componentDidMount() {
     switch (this.state.level) {
       default:
+        this.interval(this.state.words[0].syll);
+
         break;
       case 2:
         console.log("Level 2");
