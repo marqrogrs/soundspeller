@@ -9,9 +9,9 @@ class Game extends Component {
     words: [
       {
         word: "abandon",
-        grap: "A,B,A,N,D,O,N",
+        grap: "A,AR,D,V,AR,K,S",
         phon: "EY-B AE N D-AAN N",
-        syll: "a.band.on"
+        syll: "aard.vark.s"
       }
     ],
     playerAnswer: "",
@@ -48,14 +48,12 @@ class Game extends Component {
   };
 
   interval = (syll) => {
-    let results = syll.split(".").map((e, index) => {
-      e = { syll: e };
-      console.log(e.syll);
-      e.grap = this.state.words[0].grap.split(",");
-      console.log(e.grap);
-      return e;
-    });
-    console.log(results);
+    e.grap = this.state.words[0].grap.split(",").splice(index, e.syll.length);
+    if (e.grap.length > 1) {
+      if (e.grap.join("").toLowerCase() !== e.syll) {
+        console.log(e.syll, e.grap);
+      }
+    }
   };
 
   componentDidMount() {
