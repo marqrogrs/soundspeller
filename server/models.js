@@ -18,6 +18,18 @@ const users = con.define("users", {
   name: {
     type: sequelize.STRING,
     allowNull: true
+  },
+  created_at: {
+    type: sequelize.DATE,
+    allowNull: true
+  },
+  updated_at: {
+    type: sequelize.DATE,
+    allowNull: true
+  },
+  verified_at: {
+    type: sequelize.DATE,
+    allowNull: true
   }
 });
 

@@ -24,18 +24,30 @@ router.post("/register", (req, res) => {
       res.status(400).json({ message: "Email already in db" });
     } else {
       // hashing password
-      bcrypt.hash(req.body.password, 10, (err, hash) => {
-        const user = {
-          email: req.body.email,
-          password: hash,
-          name: req.body.name
-        };
+      const hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-        // adding user to db
-        users.create(user);
+      // building user object
+      const user = {
+        email: req.body.email,
+        password: hash,
+        name: req.body.name,
+        created_at: Date.now()
+      };
 
-        return res.status(200).json({ message: "User created" });
+      // adding user to db
+      users.create(user);
+
+      // creating token
+      const token = jwt.sign(user, process.env.secret_token, {
+        expiresIn: "1min"
       });
+
+      // send response
+      res
+        .status(200)
+        .json({ message: "User Created" })
+        .cookie("token", token, { httpOnly: true })
+        .end();
 
       // build email
       const mailOptions = {
@@ -46,7 +58,7 @@ router.post("/register", (req, res) => {
       };
 
       // send email
-      transporter.sendMail(mailOptions, function(error, info) {
+      transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
           console.log(error);
         } else {
@@ -79,7 +91,7 @@ router.post("/login", (req, res) => {
               .status(200)
               .json({ message: "Logged In" });
           } else {
-            res.status(400).json({ message: "Wrong Password" });
+            return res.status(400).json({ message: "Wrong Password" });
           }
         }
       );
@@ -89,8 +101,42 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/verify", verifyToken, function(req, res) {
+router.get("/verify", verifyToken, (req, res) => {
   res.status(200);
+});
+
+router.post("/passwordreset", (req, res) => {
+  users.findAndCountAll({ where: { email: req.body.email } }).then((result) => {
+    if (result.count > 0) {
+      const token = jwt.sign(
+        result.rows[0].dataValues.password,
+        result.rows[0].dataValues.created_at
+      );
+
+      // build email
+      const mailOptions = {
+        from: process.env.email_user,
+        to: req.body.email,
+        subject: "SoundSpeller Reset Password",
+        html: `<h1>Welcome</h1><p>That was easy! <a href="http://localhost:3000/resetpassword/${token}">Reset Password</a></p>`
+      };
+
+      // send email
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
+
+      res
+        .status(200)
+        .json({ message: "Reset Password Link has been sent to your email" });
+    } else {
+      return res.status(400).json({ message: "Email doesn't exist" });
+    }
+  });
 });
 
 module.exports = router;

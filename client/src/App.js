@@ -3,10 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // import { getSession } from "./components/layout/Auth/session";
 import Auth from "./components/layout/Auth/Auth";
+import ResetPassword from "./components/layout/Auth/ResetPassword";
 import withAuth from "./components/layout/Auth/withAuth";
+
 import Home from "./components/layout/Home";
 import Game from "./components/layout/Game";
 import Greetings from "./components/layout/Greetings";
+
 import Navbar from "./components/layout/Navbar/Navbar";
 
 import "./App.scss";
@@ -41,6 +44,18 @@ class App extends Component {
                     {...props}
                     setAuthentificated={this.setAuthentificated}
                   />
+                )}
+              />
+              <Route
+                exact
+                path="/reset"
+                render={(props) => <ResetPassword {...props} display="email" />}
+              />
+              <Route
+                exact
+                path="/reset/:id"
+                render={(props) => (
+                  <ResetPassword {...props} display="password" />
                 )}
               />
 

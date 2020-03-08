@@ -26,7 +26,7 @@ class Auth extends Component {
       password: this.state.password
     };
 
-    if (this.state.auth === false) {
+    if (!this.state.auth) {
       data["name"] = this.state.name;
     }
 
@@ -35,7 +35,6 @@ class Auth extends Component {
       .then((res) => {
         console.log(`${type} respons`, res);
         this.props.history.push(redirect);
-        this.props.setAuthentificated(true);
       })
       .catch((error) => console.log(`${type} error`, error));
 
@@ -69,50 +68,51 @@ class Auth extends Component {
           <form onSubmit={this.handleSubmit}>
             {!auth ? (
               <React.Fragment>
-                <div className="form-group">
-                  <label htmlFor="name">Type your Name</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="name"
-                    value={name}
-                    placeholder="Name"
-                    onChange={this.handleChange}
-                    required
-                  />
-                </div>
                 <Form
-                  auth={auth}
-                  email={email}
-                  password={password}
+                  value={name}
+                  display="name"
                   handleChange={this.handleChange}
                 />
-
-                <input
-                  type="button"
-                  onClick={this.handleRegister}
-                  value="Log In"
-                  className="btn btn-primary"
+                <Form
+                  value={email}
+                  display="email"
+                  handleChange={this.handleChange}
+                />
+                <Form
+                  display="password"
+                  value={password}
+                  handleChange={this.handleChange}
                 />
               </React.Fragment>
             ) : (
               <React.Fragment>
                 <Form
-                  email={email}
-                  auth={auth}
-                  password={password}
+                  display="email"
+                  value={email}
                   handleChange={this.handleChange}
                 />
-
-                <input
-                  type="button"
-                  onClick={this.handleRegister}
-                  value="Register"
-                  className="btn btn-primary"
+                <Form
+                  display="password"
+                  value={password}
+                  handleChange={this.handleChange}
                 />
               </React.Fragment>
             )}
+
+            <div className="form-group">
+              <input
+                type="submit"
+                value={auth ? "Log In" : "Register"}
+                className="btn btn-primary"
+              />
+            </div>
           </form>
+          <input
+            type="button"
+            onClick={this.handleRegister}
+            value={!auth ? "Log In" : "Register"}
+            className="btn btn-primary"
+          />
         </div>
       </React.Fragment>
     );

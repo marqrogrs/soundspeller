@@ -1,43 +1,67 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function Form({ email, password, auth, handleChange }) {
+function Form({ value, handleChange, display }) {
   return (
     <React.Fragment>
-      <div className="form-group">
-        <label htmlFor="email">Type your Email</label>
-        <input
-          className="form-control"
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-      </div>
+      {display === "name" && (
+        <React.Fragment>
+          <div className="form-group">
+            <label htmlFor="name">Type your Name</label>
+            <input
+              className="form-control"
+              type="text"
+              name="name"
+              value={value}
+              placeholder="Name"
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </React.Fragment>
+      )}
 
-      <div className="form-group ">
-        <label htmlFor="password">Type your Password</label>
-        <input
-          className="form-control"
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
-      </div>
+      {display === "email" && (
+        <React.Fragment>
+          <div className="form-group">
+            <label htmlFor="email">Type your Email</label>
+            <input
+              className="form-control"
+              type="email"
+              name="email"
+              value={value}
+              placeholder="Email"
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </React.Fragment>
+      )}
 
-      <div className="form-group">
-        <input
-          type="submit"
-          value={auth ? "Log In" : "Register"}
-          className="btn btn-primary"
-        />
-      </div>
+      {display === "password" && (
+        <React.Fragment>
+          <div className="form-group ">
+            <label htmlFor="password">Type your Password</label>
+            <input
+              className="form-control"
+              type="password"
+              name="password"
+              value={value}
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 }
+
+Form.propType = {
+  display: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  handleChange: PropTypes.func
+};
 
 export default Form;
