@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// import { getSession } from "./components/layout/Auth/session";
 import Auth from "./components/layout/Auth/Auth";
 import ResetPassword from "./components/layout/Auth/ResetPassword";
 import withAuth from "./components/layout/Auth/withAuth";
@@ -9,9 +8,9 @@ import withAuth from "./components/layout/Auth/withAuth";
 import Home from "./components/layout/Home";
 import Game from "./components/layout/Game";
 import Greetings from "./components/layout/Greetings";
-
 import Navbar from "./components/layout/Navbar/Navbar";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
 class App extends Component {
@@ -53,7 +52,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/reset/:id"
+                path="/reset/:token"
                 render={(props) => (
                   <ResetPassword {...props} display="password" />
                 )}

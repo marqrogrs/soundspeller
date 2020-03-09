@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
+import { Alert } from "react-bootstrap";
 import Form from "./Form";
 
 class Auth extends Component {
@@ -12,7 +14,7 @@ class Auth extends Component {
       password: "",
       name: "",
       errors: "",
-      auth: true
+      auth: true // true === log in false === register
     };
   }
 
@@ -36,7 +38,11 @@ class Auth extends Component {
         console.log(`${type} respons`, res);
         this.props.history.push(redirect);
       })
-      .catch((error) => console.log(`${type} error`, error));
+      .catch((error) => {
+        console.log(`${type} error`, error);
+
+        this.setState({ errors: error.response.data.message });
+      });
 
     console.log("Form Submited");
   };
@@ -57,25 +63,30 @@ class Auth extends Component {
         );
   };
 
+  handleClose = () => {
+    this.setState({ errors: "" });
+  };
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    const { email, password, name, auth } = this.state;
+    const { email, password, name, auth, errors } = this.state;
     return (
       <React.Fragment>
         <div className="jumbotron">
+          {errors && (
+            <Alert variant={"danger"} onClose={this.handleClose} dismissible>
+              <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+              <p>{errors}</p>
+            </Alert>
+          )}
           <form onSubmit={this.handleSubmit}>
-            {!auth ? (
+            {auth ? (
               <React.Fragment>
                 <Form
-                  value={name}
-                  display="name"
-                  handleChange={this.handleChange}
-                />
-                <Form
-                  value={email}
                   display="email"
+                  value={email}
                   handleChange={this.handleChange}
                 />
                 <Form
@@ -87,8 +98,13 @@ class Auth extends Component {
             ) : (
               <React.Fragment>
                 <Form
-                  display="email"
+                  value={name}
+                  display="name"
+                  handleChange={this.handleChange}
+                />
+                <Form
                   value={email}
+                  display="email"
                   handleChange={this.handleChange}
                 />
                 <Form
@@ -113,6 +129,8 @@ class Auth extends Component {
             value={!auth ? "Log In" : "Register"}
             className="btn btn-primary"
           />
+
+          <NavLink to={"/reset"}>Forgot Password?</NavLink>
         </div>
       </React.Fragment>
     );

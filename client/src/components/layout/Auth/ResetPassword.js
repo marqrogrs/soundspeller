@@ -1,15 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import Form from "./Form";
 
-const ResetPassword = ({ display }) => {
-  return (
-    <React.Fragment>
-      <div>
-        <h1>Reset password</h1>
-        <Form display={display} />
-      </div>
-    </React.Fragment>
-  );
-};
+class ResetPassword extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { display } = this.props;
+    return (
+      <React.Fragment>
+        <div className="jumbotron">
+          <h1>Reset password</h1>
+
+          <Form display={display} />
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 export default ResetPassword;

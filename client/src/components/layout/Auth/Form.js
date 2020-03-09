@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Form({ value, handleChange, display }) {
+function Form({ value, handleChange, display, minLength }) {
   return (
     <React.Fragment>
       {display === "name" && (
@@ -50,6 +50,7 @@ function Form({ value, handleChange, display }) {
               placeholder="Password"
               onChange={handleChange}
               required
+              minLength="8"
             />
           </div>
         </React.Fragment>
@@ -62,6 +63,10 @@ Form.propType = {
   display: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   handleChange: PropTypes.func
+};
+
+Form.defaultProps = {
+  minLength: 8
 };
 
 export default Form;
