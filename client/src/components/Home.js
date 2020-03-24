@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Question from './Inputs/Question'
+import Game from './Game'
 
 class Home extends Component {
 	constructor(props) {
@@ -61,6 +62,7 @@ class Home extends Component {
 					handleQuestions={this.handleQuestions}
 					handleLevel={this.handleLevel}
 				/>
+				<Game />
 			</React.Fragment>
 		)
 	}

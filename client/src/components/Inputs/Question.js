@@ -17,12 +17,12 @@ const Question = ({ handleQuestions, handleLevel }) => {
 
 				<Levels handleLevel={handleLevel} />
 
-				<input
+				{/* <input
 					type="submit"
 					value="Play"
 					className="form-control btn btn-primary mt-5"
 					onClick={handleQuestions}
-				/>
+				/> */}
 			</div>
 		</React.Fragment>
 	)
