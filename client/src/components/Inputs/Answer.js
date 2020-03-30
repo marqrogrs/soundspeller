@@ -5,12 +5,15 @@ const Answer = ({ placeholder, handlePlayerInput }) => {
 	return (
 		<React.Fragment>
 			<div className="form-group">
-				<label htmlFor="Answer">Type your Answer</label>
+				<label style={{ textAlign: 'center' }} htmlFor="Answer">
+					Speed
+				</label>
+        <input style={{width: '100%'}} type="range"/>
+        <button className="btn primary">Run</button>
 				<input
 					name="Answer"
 					id="answer"
 					className="form-control"
-					placeholder={placeholder}
 					onChange={handlePlayerInput}
 				/>
 			</div>
