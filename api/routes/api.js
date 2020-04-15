@@ -9,5 +9,8 @@ var api_controller = require('../controllers/apiController');
 // GET catalog home page.
 router.get('/lessons', api_controller.index);
 
+router.get('/phonemes', api_controller.phoneme);
+
+router.get('/word', api_controller.word)
 
 module.exports = router;

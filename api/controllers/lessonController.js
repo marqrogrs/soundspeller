@@ -1,10 +1,12 @@
 var Lesson = require('../models/lesson');
+var Word = require('../models/word');
 
 var async = require('async');
 const { check, validationResult, body } = require('express-validator');
 
-exports.index = function(req, res) {
-    Lesson.find({}, 'lesson_id words')
+exports.index = function(req, res, next) {
+    Lesson.find({})
+    .populate("words")
     .exec(function (err, list_lessons) {
         if (err) { return next(err); }
         //Successful, so render
@@ -79,33 +81,6 @@ exports.lesson_create_post = [
         }
     }
 ];
-
-// Display lesson delete form on GET.
-exports.lesson_delete_get = function(req, res) {
-    Lesson.findById(req.params.id)
-        .exec(function(err, lesson) {
-            if (err) { return next(err); }
-            if (lesson==null) { // No results.
-                res.redirect('/lessons');
-            }
-            // Successful, so render.
-            res.render('lesson_delete', { title: 'Delete Lesson', lesson: lesson });
-        });
-};
-
-// Handle lesson delete on POST.
-exports.lesson_delete_post = function(req, res) {
-    Lesson.findById(req.body.id)
-        .exec(function(err, lesson) {
-            if (err) { return next(err); }
-            // Success
-            Lesson.findByIdAndRemove(req.body.id, function deleteLesson(err) {
-                if (err) { return next(err); }
-                // Success - go to author list
-                res.redirect('/lessons')
-            })
-        });
-};
 
 // Display lesson update form on GET.
 exports.lesson_update_get = function(req, res) {

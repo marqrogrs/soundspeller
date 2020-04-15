@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 
 var LessonSchema = new Schema(
     {
-        lesson_id: {type: String, required: true, max: 100},
-        words: [{type: String, max: 100}]
+        lesson_id: {type: String, required: true, max: 10},
+        words: [{type: Schema.Types.ObjectId, ref: 'Word'}]
     }
 );
 

@@ -15,12 +15,6 @@ router.get('/create', lesson_controller.lesson_create_get);
 // POST request for creating lesson.
 router.post('/create', lesson_controller.lesson_create_post);
 
-// GET request to delete lesson.
-router.get('/:id/delete', lesson_controller.lesson_delete_get);
-
-// POST request to delete lesson.
-router.post('/:id/delete', lesson_controller.lesson_delete_post);
-
 // GET request to update lesson.
 router.get('/:id/update', lesson_controller.lesson_update_get);
 

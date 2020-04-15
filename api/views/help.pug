@@ -3,7 +3,11 @@ extends layout
 block content
     h1 API Help
     
-    p To access the api, go to url.com/api/lessons
-    p If you want a specific lesson, with some id, say id: 9.8
-    p Then you should do the following query:
-    p url.com/api/lessons?id=9.8
+    h2 All api endpoints:
+    p url.com/api/lessons - All lessons
+    p url.com/api/lessons?id=lesson_id - Lesson detail (e.g. url.com/api/lessons?id=5.4)
+    p url.com/api/word?id=someObjectID - Word detail (e.g. url.com/api/word?id=5e9728d76f3fcb05c3301d56)
+    p url.com/api/word?word=aardvark - word detail (the word can be in all cases, e.g. AaRdVaRk. api example url.com/api/word?word=aardvark)
+    p url.com/api/phonemes - All phonemes
+    p url.com/api/phonemes?id=someObjectID - Phonemes detail (e.g. url.com/api/phonemes?id=5e945c7b44204c2e335d8538)
+    p url.com/api/phonemes?sound=someObjectID - Sound of phoneme (e.g. url.com/api/phonemes?sound=5e945c7b44204c2e335d8538)

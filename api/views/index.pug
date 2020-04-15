@@ -8,10 +8,11 @@ block content
         each lesson in lesson_list
             li.list-group-item 
                 h3 ID: #{lesson.lesson_id}
-                p #{lesson.words.join(", ")}
+                each word in lesson.words
+                    a(href=word.url) #{word.word}
+                    | , 
+                br    
                 a.btn.btn-primary(href="/lessons/" + lesson._id + "/update") Edit
-                | 
-                a.btn.btn-danger(href="/lessons/" + lesson._id + "/delete") Delete
                 
                 
 
