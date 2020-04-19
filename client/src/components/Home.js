@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import Question from './Inputs/Question'
 import Game from './Game'
-import Sidebar from './Sidebar'
 import '../css/Home.css'
 
 class Home extends Component {
@@ -60,7 +59,6 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="Home">
-
 				<div className="main">
 					<Question
 						handleQuestions={this.handleQuestions}

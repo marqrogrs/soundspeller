@@ -16,7 +16,6 @@ const App = () => {
 						<Sidebar />
 						<Route exact path={'/home'} component={Home} />
 						<Route path={'/Game'} component={Game} />
-            
 					</Switch>
 				</div>
 			</Router>
