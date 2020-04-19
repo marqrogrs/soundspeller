@@ -4,6 +4,8 @@ import { fetchAllLessons } from '../api'
 
 import Loading from './common/Loading'
 import { Link } from 'react-router-dom'
+import '../css/Sidebar.css'
+
 const Sidebar = () => {
 	const [lessons, setLessons] = useState()
 	const [currentLesson, setCurrentLesson] = useState()
@@ -18,7 +20,6 @@ const Sidebar = () => {
 
 	if (!lessons) return <Loading />
 
-	console.log(lessons)
 	return (
 		<nav id="Sidebar">
 			<div className="sidebar-header">
@@ -28,7 +29,7 @@ const Sidebar = () => {
 			<ul className="list-unstyled components">
 				{lessons.map(lesson => (
 					<li className="active">
-						<Link to={`/lessons/${lesson._id}`} activeClassName="active">
+						<Link to={`/lesson/${lesson._id}`} activeClassName="active">
 							Lesson {lesson.lesson_id}
 						</Link>
 					</li>
