@@ -29,7 +29,7 @@ const Sidebar = () => {
 			<ul className="list-unstyled components">
 				{lessons.map(lesson => (
 					<li className="active">
-						<Link to={`/lesson/${lesson._id}`} activeClassName="active">
+						<Link to={`/lesson/${lesson.lesson_id}`} activeClassName="active">
 							Lesson {lesson.lesson_id}
 						</Link>
 					</li>

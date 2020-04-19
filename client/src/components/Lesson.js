@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Question from './Inputs/Question'
@@ -8,6 +8,7 @@ import { fetchLesson } from '../api'
 
 const Lesson = props => {
 	console.log('Lesson in ', props)
+	const [lesson, setLesson] = useState()
 	const location = useLocation()
 
 	// constructor(props) {
@@ -62,12 +63,13 @@ const Lesson = props => {
 	// }
 
 	useEffect(() => {
-		const _id = location.pathname.split('/').reverse()[0] // TODO: Find a cleaner way to get ID
-		fetchLesson(_id).then(res => console.log(res))
+		const id = location.pathname.split('/').reverse()[0] // TODO: Find a cleaner way to get ID
+		console.log(location.pathname)
+		fetchLesson(id).then(res => setLesson(res.data))
 	}, [location])
 	return (
 		<div className="Home">
-			<h1>Lesson </h1>
+			<h1>Lesson {lesson?.lesson_id}</h1>
 			<div className="main">
 				<Question handleQuestions={() => {}} handleLevel={() => {}} />
 				<Game />
