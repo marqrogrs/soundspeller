@@ -5,3 +5,7 @@ export function fetchLesson(id) {
 	console.log('fetching', id)
 	return axios.get(url + '/lessons', { params: { id } })
 }
+
+export function fetchAllLessons() {
+	return axios.get(url + '/lessons')
+}

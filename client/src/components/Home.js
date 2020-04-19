@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import Question from './Inputs/Question'
 import Game from './Game'
+import Sidebar from './Sidebar'
+import '../css/Home.css'
 
 class Home extends Component {
 	constructor(props) {
@@ -57,13 +59,16 @@ class Home extends Component {
 
 	render() {
 		return (
-			<React.Fragment>
-				<Question
-					handleQuestions={this.handleQuestions}
-					handleLevel={this.handleLevel}
-				/>
-				<Game />
-			</React.Fragment>
+			<div className="Home">
+
+				<div className="main">
+					<Question
+						handleQuestions={this.handleQuestions}
+						handleLevel={this.handleLevel}
+					/>
+					<Game />
+				</div>
+			</div>
 		)
 	}
 }
