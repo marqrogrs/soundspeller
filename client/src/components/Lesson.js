@@ -4,12 +4,28 @@ import { useLocation } from 'react-router-dom'
 import Question from './Inputs/Question'
 import Game from './Game'
 import '../css/Home.css'
-import { fetchLesson } from '../api'
+import { fetchLesson, fetchWords } from '../api'
 
 const Lesson = props => {
-	console.log('Lesson in ', props)
 	const [lesson, setLesson] = useState()
+	const [words, setWords] = useState()
 	const location = useLocation()
+
+	useEffect(() => {
+		const id = location.pathname.split('/').reverse()[0] // TODO: Find a cleaner way to get ID
+		// console.log(location.pathname)
+		fetchLesson(id)
+			.then(res => {
+				setLesson(res.data)
+			})
+			.catch(err => console.log(err))
+	}, [location])
+
+	useEffect(() => {
+		if (!lesson) return
+		const ids = lesson.words.map(word => word._id)
+		fetchWords(ids).then(res => console.log(res.data))
+	}, [lesson])
 
 	// constructor(props) {
 	// 	super(props)
@@ -62,11 +78,6 @@ const Lesson = props => {
 	// 	level.classList.replace('btn-outline-primary', 'btn-primary')
 	// }
 
-	useEffect(() => {
-		const id = location.pathname.split('/').reverse()[0] // TODO: Find a cleaner way to get ID
-		console.log(location.pathname)
-		fetchLesson(id).then(res => setLesson(res.data))
-	}, [location])
 	return (
 		<div className="Home">
 			<h1>Lesson {lesson?.lesson_id}</h1>

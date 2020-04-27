@@ -9,3 +9,9 @@ export function fetchLesson(id) {
 export function fetchAllLessons() {
 	return axios.get(url + '/lessons')
 }
+
+export function fetchWords(ids) {
+	const idsStr = ids.reduce((id, str) => str + ',' + id, '')
+	console.log(url + `/word?id=${idsStr}`)
+	return axios.get(url + `/word?id=${idsStr}`)
+}
