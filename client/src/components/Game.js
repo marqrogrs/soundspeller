@@ -17,8 +17,6 @@ const Game = (props) => {
 		fetchWord(TEST_WROD).then((res) => setWord(res.data[0]))
 	}, [])
 
-	// Player Input from Mechanical Keyboard
-	const handlePlayerInput = (e) => {}
 
 	// Update Answer Component
 	const handleUpdate = (value) => {
@@ -77,7 +75,9 @@ const Game = (props) => {
 			default:
 				append(button)
 		}
-	}
+  }
+  
+  const handlePlayerInput = (e) => setInputValue(e.target.value)
 
 	const handleWordDicated = () => {
 		setIsDictating(false)
