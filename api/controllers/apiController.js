@@ -4,15 +4,15 @@ var Phoneme = require('../models/phoneme');
 
 // url/api/lessons?id=1.3
 exports.index = function(req, res, next) {
-    if (req.query.id) {
-        Lesson.findOne({ lesson_id: req.query.id }, 'lesson_id words')
+    if (req.body.id) {
+        Lesson.findOne({ lesson_id: req.body.id }, 'lesson_id words')
             .populate("words")
             .exec(function (err, lesson) {
                 if (err) {
                     return next(err);
                 }
                 if (lesson.length == 0) {
-                    res.status(500).json({ error: "No lessons found with id: " + req.query.id })
+                    res.status(500).json({ error: "No lessons found with id: " + req.body.id })
                 } else {
                     //Successful, so render
                     res.json(lesson);
@@ -30,19 +30,17 @@ exports.index = function(req, res, next) {
 };
 
 
-// url/api/word?id=4902853,47230ht09
-// url/api/word?word=foot,aardvark
+// url/api/word?ids=4902853,47230ht09
+// url/api/word?words=foot,aardvark
 exports.word = function (req, res, next) {
-    if (req.query.word) {
-        var words = req.query.word.split(",").map(word => word.toUpperCase());
-        Word.find({ word: { $in: words } }).exec(function (err, word) {
+    if (req.body.words) {
+        Word.find({ word: { $in: req.body.words } }).exec(function (err, word) {
             if (err) { return next(err) }
 
             res.json(word)
         });
-    } else if (req.query.id) {
-        var ids = req.query.id.split(",");
-        Word.find({ _id: { $in: ids }})
+    } else if (req.body.ids) {
+        Word.find({ _id: { $in: req.body.ids }})
             .populate("phonemes")
             .exec(function (err, word) {
             if (err) { return next(err) }
@@ -59,15 +57,15 @@ exports.word = function (req, res, next) {
 // url/api/phonemes?sound=52j2h5345 will give the soundfile
 // url/api/phonemes?id=52j2h5345 will give the phoneme with the id
 exports.phoneme = function (req, res, next) {
-    if (req.query.sound) {
-        Phoneme.findById(req.query.sound).exec(function (err, phoneme) {
+    if (req.body.sound) {
+        Phoneme.findById(req.body.sound).exec(function (err, phoneme) {
             if (err) { return next(err); }
 
             res.contentType(phoneme.soundfile.contentType)
             res.send(phoneme.soundfile.data);
         })
-    } else if (req.query.id) {
-        Phoneme.findById(req.query.id).exec(function(err, phoneme) {
+    } else if (req.body.id) {
+        Phoneme.findById(req.body.id).exec(function(err, phoneme) {
             if (err) { return next(err); }
 
             res.json(phoneme)
