@@ -12,6 +12,10 @@ export function fetchAllLessons() {
 
 export function fetchWords(ids) {
 	const idsStr = ids.reduce((id, str) => str + ',' + id, '')
-	console.log(url + `/word?id=${idsStr}`)
+	// console.log(url + `/word?id=${idsStr}`)
 	return axios.get(url + `/word?id=${idsStr}`)
+}
+
+export function fetchWord(id) {
+	return axios.get(url + `/word?id=${id}`)
 }

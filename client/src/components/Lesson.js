@@ -24,7 +24,7 @@ const Lesson = props => {
 	useEffect(() => {
 		if (!lesson) return
 		const ids = lesson.words.map(word => word._id)
-		fetchWords(ids).then(res => console.log(res.data))
+		// fetchWords(ids).then(res => console.log(res.data))
 	}, [lesson])
 
 	// constructor(props) {

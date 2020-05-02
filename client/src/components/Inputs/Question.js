@@ -16,13 +16,6 @@ const Question = ({ handleQuestions, handleLevel }) => {
 				<label htmlFor="submit"></label>
 
 				<Levels handleLevel={handleLevel} />
-
-				{/* <input
-					type="submit"
-					value="Play"
-					className="form-control btn btn-primary mt-5"
-					onClick={handleQuestions}
-				/> */}
 			</div>
 		</React.Fragment>
 	)

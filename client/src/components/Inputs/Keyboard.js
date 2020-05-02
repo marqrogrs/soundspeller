@@ -8,34 +8,24 @@ const Layout = ({
 	layout,
 	display,
 	buttonTheme,
+  word,
+  onKeyPress,
 	updateAnswer,
 	deleteAnswer,
 }) => {
-	const keyboard = useRef()
+  const keyboard = useRef()
+
+  useEffect(() => {console.log('word', word)}, [word])
+  
 
 	useEffect(() => {
 		// console.log(keyboard.current.getButtonElement("a"));
 	})
 
-	// Keyboard Function
-	const onKeyPress = button => {
-		if (button === '{bksp}') {
-			// delete last letter
-			deleteAnswer()
-		} else if (button === '{enter}') {
-			// submit the word
-		} else if (button === '{space}') {
-			updateAnswer(' ')
-		} else {
-			// add letter to state
-			updateAnswer(button)
-		}
-	}
-
 	return (
 		<React.Fragment>
 			<Keyboard
-				keyboardRef={r => (keyboard.current = r)}
+				keyboardRef={(r) => (keyboard.current = r)}
 				onKeyPress={onKeyPress}
 				layout={layout}
 				display={display}
