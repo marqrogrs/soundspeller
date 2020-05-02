@@ -4,38 +4,19 @@ import Keyboard from './Inputs/Keyboard'
 import Answer from './Inputs/Answer'
 import { fetchWord } from '../api'
 import { playButton } from './common/Miscellaneous'
+import { DEFAULT_BUTTONS_THEME } from '../constants'
 
 console.log('relevant')
 const TEST_WROD = '5e9743524377480ecf309ec3'
 const Game = (props) => {
 	const [isDictating, setIsDictating] = useState(false)
+	const [buttonsTheme, setButtonsTheme] = useState(DEFAULT_BUTTONS_THEME)
 	const [inputValue, setInputValue] = useState('')
 	const [word, setWord] = useState(null)
 
 	useEffect(() => {
-		console.log('just...')
 		fetchWord(TEST_WROD).then((res) => setWord(res.data[0]))
 	}, [])
-
-
-	// Update Answer Component
-	const handleUpdate = (value) => {
-		// this.setState((prevState) => ({
-		// 	playerAnswer: prevState.playerAnswer + value,
-		// }))
-		// document.getElementById('answer').value = this.state.playerAnswer
-	}
-
-	// Delete Answer Component
-	const handleDelete = () => {
-		// this.setState({
-		// 	playerAnswer: this.state.playerAnswer.substr(
-		// 		0,
-		// 		this.state.playerAnswer.length - 1
-		// 	),
-		// })
-		// document.getElementById('answer').value = this.state.playerAnswer
-	}
 
 	const speak = (word) => {
 		const utterance = new SpeechSynthesisUtterance(word)
@@ -43,14 +24,19 @@ const Game = (props) => {
 	}
 
 	const interval = (syll) => {}
+	const press = (button) => {
+		setButtonsTheme((theme) => [
+			...theme,
+			{ class: 'pressed', buttons: button },
+		])
+	}
 
 	const playWord = () => {
-		speak('The word is ' + word.word)
+		// speak('The word is ' + word.word)
+		// press(word.)
 
-		// utterance.
-		// speak('The word is ' + word.word)
-		// speak('The word is ' + word.word)
-		console.log('playing')
+		const letters = word.word.toLowerCase().split('')
+		press(letters.join(' '))
 	}
 
 	const wordHeader = word ? (
@@ -75,9 +61,9 @@ const Game = (props) => {
 			default:
 				append(button)
 		}
-  }
-  
-  const handlePlayerInput = (e) => setInputValue(e.target.value)
+	}
+
+	const handlePlayerInput = (e) => setInputValue(e.target.value)
 
 	const handleWordDicated = () => {
 		setIsDictating(false)
@@ -100,8 +86,7 @@ const Game = (props) => {
 				word={word}
 				onKeyPress={onVirtKeyboardKeyPressed}
 				onWordDictated={handleWordDicated}
-				updateAnswer={handleUpdate}
-				deleteAnswer={handleDelete}
+				buttonTheme={buttonsTheme}
 			/>
 		</React.Fragment>
 	)
