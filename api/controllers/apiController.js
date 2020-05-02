@@ -30,17 +30,19 @@ exports.index = function(req, res, next) {
 };
 
 
-// url/api/word?id=4902853
-// url/api/word?word=foot
-exports.word = function (req, res) {
+// url/api/word?id=4902853,47230ht09
+// url/api/word?word=foot,aardvark
+exports.word = function (req, res, next) {
     if (req.query.word) {
-        Word.findOne({ word: req.query.word.toUpperCase() }).exec(function (err, word) {
+        var words = req.query.word.split(",").map(word => word.toUpperCase());
+        Word.find({ word: { $in: words } }).exec(function (err, word) {
             if (err) { return next(err) }
 
             res.json(word)
-        })
+        });
     } else if (req.query.id) {
-        Word.findById(req.query.id)
+        var ids = req.query.id.split(",");
+        Word.find({ _id: { $in: ids }})
             .populate("phonemes")
             .exec(function (err, word) {
             if (err) { return next(err) }
