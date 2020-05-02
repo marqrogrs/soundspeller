@@ -8,15 +8,20 @@ const Layout = ({
 	layout,
 	display,
 	buttonTheme,
-  word,
-  onKeyPress,
+	word,
+	onKeyPress,
 	updateAnswer,
 	deleteAnswer,
 }) => {
-  const keyboard = useRef()
+	const keyboard = useRef()
 
-  useEffect(() => {console.log('word', word)}, [word])
-  
+	useEffect(() => {
+		console.log('word', word)
+		keyboard.current.setInput('Hello World!')
+		console.log(keyboard.current)
+	}, [word])
+
+	const press = (key) => {}
 
 	useEffect(() => {
 		// console.log(keyboard.current.getButtonElement("a"));

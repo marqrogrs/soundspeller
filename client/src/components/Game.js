@@ -9,6 +9,7 @@ console.log('relevant')
 const TEST_WROD = '5e9743524377480ecf309ec3'
 const Game = (props) => {
 	const [isDictating, setIsDictating] = useState(false)
+	const [inputValue, setInputValue] = useState('')
 	const [word, setWord] = useState(null)
 
 	useEffect(() => {
@@ -47,6 +48,10 @@ const Game = (props) => {
 
 	const playWord = () => {
 		speak('The word is ' + word.word)
+
+		// utterance.
+		// speak('The word is ' + word.word)
+		// speak('The word is ' + word.word)
 		console.log('playing')
 	}
 
@@ -55,7 +60,24 @@ const Game = (props) => {
 			<span>The word is: </span>
 			<span style={{ color: 'red' }}>{word.word}</span>
 		</h3>
-  ) : null
+	) : null
+
+	const append = (letter) => setInputValue((prevValue) => prevValue + letter)
+	const deleteLetter = () =>
+		setInputValue((prevValue) => prevValue.slice(0, -1))
+
+	const onVirtKeyboardKeyPressed = (button) => {
+		switch (button) {
+			case '{bksp}':
+				deleteLetter()
+				break
+			case '{space}':
+				append(' ')
+				break
+			default:
+				append(button)
+		}
+	}
 
 	const handleWordDicated = () => {
 		setIsDictating(false)
@@ -70,11 +92,13 @@ const Game = (props) => {
 				</span>
 			</div>
 			<Answer
+				inputValue={inputValue}
 				placeholder={'Type the word'}
 				handlePlayerInput={handlePlayerInput}
 			/>
 			<Keyboard
 				word={word}
+				onKeyPress={onVirtKeyboardKeyPressed}
 				onWordDictated={handleWordDicated}
 				updateAnswer={handleUpdate}
 				deleteAnswer={handleDelete}

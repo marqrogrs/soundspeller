@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Answer = ({ placeholder, handlePlayerInput }) => {
+const Answer = ({ placeholder, handlePlayerInput, inputValue }) => {
 	return (
 		<React.Fragment>
 			<div className="form-group">
 				<label style={{ textAlign: 'center' }} htmlFor="Answer">
 					Speed
 				</label>
-        <input style={{width: '100%'}} type="range"/>
-        <button className="btn primary">Run</button>
+				<input style={{ width: '100%' }} type="range" />
+				<button className="btn primary">Run</button>
 				<input
+					value={inputValue}
 					name="Answer"
 					id="answer"
 					className="form-control"
