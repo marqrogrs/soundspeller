@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 
 import Keyboard from './Inputs/Keyboard'
 import Answer from './Inputs/Answer'
-import { fetchWord } from '../api'
+import { fetchWord, fetchWords } from '../api'
 import { playButton } from './common/Miscellaneous'
 import { DEFAULT_BUTTONS_THEME } from '../constants'
 
@@ -15,7 +15,8 @@ const Game = (props) => {
 	const [word, setWord] = useState(null)
 
 	useEffect(() => {
-		fetchWord(TEST_WROD).then((res) => setWord(res.data[0]))
+    fetchWord(TEST_WROD).then((res) => setWord(res.data[0]))
+    fetchWords().then(res => console.log(res))
 	}, [])
 
 	const speak = (word) => {
